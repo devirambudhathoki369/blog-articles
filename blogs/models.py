@@ -13,8 +13,8 @@ class Category(models.Model):
         return self.category_name
     
 STATUS_CHOICES = (
-    ('Draft', 'Draft'),
-    ('Published', 'Published')
+    (0, 'Draft'),
+    (1, 'Published')
 )
 
 class Blog(models.Model):
@@ -26,6 +26,7 @@ class Blog(models.Model):
     short_description = models.TextField(max_length=500)
     blog_body = models.TextField(max_length=5000)
     status = models.IntegerField(choices=STATUS_CHOICES, default=0)
+    featured_post = models.BooleanField(default=False, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

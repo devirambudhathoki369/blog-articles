@@ -3,8 +3,8 @@ from .models import Category, Blog
 
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'category', 'author', 'status',)
+    list_display = ('title', 'category', 'author', 'status', 'featured_post',)
     search_fields = ('title', 'category__category_name', 'author__username', 'status',)
-    list_editable = ('status',)
+    list_editable = ('status', 'featured_post',)
 admin.site.register(Category)
 admin.site.register(Blog, BlogAdmin)
