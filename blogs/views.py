@@ -1,11 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Blog, Category
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 
 
 def post_by_category(request, category_id):
     posts = Blog.objects.filter(category=category_id, status=1)
-    category = Category.objects.get(pk=category_id)
+    try:
+        category = Category.objects.get(pk=category_id)
+    except Category.DoesNotExist:
+        return redirect('home')
+    # Use get_object_or_404 to handle the case where the category does not exist
     context = {
         'posts': posts,
         'category': category
